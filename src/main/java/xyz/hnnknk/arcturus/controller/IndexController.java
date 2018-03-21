@@ -15,10 +15,6 @@ public class IndexController {
 
     @RequestMapping(value = "/")
     public String index() {
-        try {
-            cityParserService.parse();
-        } catch (IOException e) {
-        }
         return "index";
     }
 }

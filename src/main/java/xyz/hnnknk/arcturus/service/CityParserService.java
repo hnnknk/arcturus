@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.arcturus.dao.ArticleDAO;
 import xyz.hnnknk.arcturus.model.Article;
+import xyz.hnnknk.arcturus.model.Query;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CityParserService implements ParserService {
@@ -21,12 +23,14 @@ public class CityParserService implements ParserService {
 
     @Transactional
     @Override
-    public void parse() throws IOException {
+    public void parse(Query query) throws IOException {
         ArrayList<Article> articles = new ArrayList<>();
 
-        Document doc = Jsoup.connect("https://www.city-n.ru/div/2/300").timeout(10000).validateTLSCertificates(false).get();
+        if(query.getName().contains("city-n")) {
+            System.out.println("Enter in parser");
+            Document doc = Jsoup.connect("https://www.city-n.ru/div/2/300").timeout(10000).validateTLSCertificates(false).get();
 
-        Elements elements = doc.getElementsByAttributeValue("class", "news_title");
+            Elements elements = doc.getElementsByAttributeValue("class", "news_title");
 
             for (int i = 0; i < 3; i++) {
                 Article article = new Article();
@@ -35,25 +39,37 @@ public class CityParserService implements ParserService {
                 article.setUrl(el.attr("href"));
                 articles.add(article);
             }
-        System.out.println("------------------------");
+            System.out.println("------------------------");
 
-        for (Article article : articles) {
-            Document doc1 = Jsoup.connect("https://www.city-n.ru" + article.getUrl()).timeout(10000).validateTLSCertificates(false).get();
-            Element el= doc1.selectFirst(".news_text");
+            for (Article article : articles) {
+                Document doc1 = Jsoup.connect("https://www.city-n.ru" + article.getUrl()).timeout(10000).validateTLSCertificates(false).get();
+                Element el= doc1.selectFirst(".news_text");
 
-            Elements childs = el.select("p");
-            for (Element child : childs) {
-                article.setBody(article.getBody() + "\n" + child.text());
+                Elements childs = el.select("p");
+                for (Element child : childs) {
+                    if(article.getBody() == null) {
+                        article.setBody(child.text());
+                    } else {
+                        article.setBody(article.getBody() + "\n" + child.text());
+                    }
+                }
+                articleDAO.save(article);
             }
-            articleDAO.save(article);
+
+            for (Article article : articleDAO.listAll()) {
+                System.out.println(article.getTitle());
+                System.out.println("****************");
+                System.out.println(article.getBody());
+            }
+
+            System.out.println(doc.title());
         }
 
-        for (Article article : articleDAO.listAll()) {
-            System.out.println(article.getTitle());
-            System.out.println("****************");
-            System.out.println(article.getBody());
-        }
+    }
 
-        System.out.println(doc.title());
+    @Transactional
+    @Override
+    public List<Article> listAll() {
+        return articleDAO.listAll();
     }
 }
