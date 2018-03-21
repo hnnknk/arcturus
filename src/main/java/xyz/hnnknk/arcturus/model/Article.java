@@ -1,9 +1,23 @@
 package xyz.hnnknk.arcturus.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "article")
 public class Article {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Lob
+    @Column(name = "body",length = 8000)
     private String body;
+
+    @Column(name = "url")
     private String url;
 
     public Article() {
