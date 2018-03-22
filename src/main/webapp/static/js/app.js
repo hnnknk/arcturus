@@ -9,6 +9,11 @@ App.config(function($routeProvider){
             templateUrl: 'static/view/parse.html'
 
         })
+        .when('/rssparse',{
+
+            templateUrl: 'static/view/rssParse.html'
+
+        })
         .when('/result',{
 
             templateUrl: 'static/view/result.html'

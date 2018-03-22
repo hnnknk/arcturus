@@ -23,6 +23,7 @@
           </div>
           <ul class="nav navbar-nav navbar-right">
               <li><a href="#!parse">Спарсить новости с сайта</a></li>
+              <li><a href="#!rssparse">Спарсить новости с rss-ленты</a></li>
               <li><a href="#!result">Просмотреть результаты</a></li>
           </ul>
       </div>

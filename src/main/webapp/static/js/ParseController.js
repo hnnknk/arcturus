@@ -4,10 +4,14 @@ angular.module('myApp').controller('ParseController', ['$scope', 'ParseService',
     var self = this;
     self.query = {url:'', urlSuffix:'', dateTag:'', dateName:'', dateTextTag:'', titleTag:'',
         titleName:'', titleTextTag:'', isFullLinkToBody:'', bodyTag:'', bodyName:'', bodyTextTag:''};
+    self.rssQuery = {url:'', bodyTag:'', bodyName:'', bodyTextTag:''};
     self.article = {title:'', date:'', body:''};
     self.articles = [];
 
     self.submit = submit;
+    self.rssSubmit = rssSubmit;
+    self.kinopoiskSubmit = kinopoiskSubmit;
+    self.sportSubmit = sportSubmit;
     self.citySubmit = citySubmit;
     self.shazooSubmit = shazooSubmit;
     self.kremlinSubmit = kremlinSubmit;
@@ -29,6 +33,20 @@ angular.module('myApp').controller('ParseController', ['$scope', 'ParseService',
 
     function createQuery(query){
         ParseService.createQuery(query);
+    }
+
+    function createRssQuery(query){
+        ParseService.createRssQuery(query);
+    }
+
+    function kinopoiskSubmit() {
+        var kino = {url:'https://st.kp.yandex.net/rss/news.rss', bodyTag:'class', bodyName:'article__content newsContent error_report_area', bodyTextTag:''}
+        createRssQuery(kino);
+    }
+
+    function sportSubmit() {
+        var sport = {url:'https://www.sports.ru/rss/rubric.xml?s=208', bodyTag:'class', bodyName:'https://www.sports.ru/rss/rubric.xml?s=208', bodyTextTag:''}
+        createRssQuery(sport)
     }
 
     function citySubmit() {
@@ -53,10 +71,17 @@ angular.module('myApp').controller('ParseController', ['$scope', 'ParseService',
         reset();
     }
 
+    function rssSubmit() {
+
+        createRssQuery(self.rssQuery);
+        reset();
+    }
+
 
     function reset(){
         self.query = {url:'', urlSuffix:'', dateTag:'', dateName:'', dateTextTag:'', titleTag:'',
             titleName:'', titleTextTag:'', isFullLinkToBody:false, bodyTag:'', bodyName:'', bodyTextTag:''};
+        self.rssQuery = {url:'', bodyTag:'', bodyName:'', bodyTextTag:''};
         $scope.myForm.$setPristine();
     }
 
