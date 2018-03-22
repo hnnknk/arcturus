@@ -9,9 +9,9 @@ App.config(function($routeProvider){
             templateUrl: 'static/view/parse.html'
 
         })
-        .when('/results',{
+        .when('/result',{
 
-            templateUrl: 'static/view/results.html'
+            templateUrl: 'static/view/result.html'
 
         })
         .otherwise(

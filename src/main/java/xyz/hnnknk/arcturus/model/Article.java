@@ -13,14 +13,25 @@ public class Article {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "date")
+    private String date;
+
     @Lob
-    @Column(name = "body",length = 8000)
+    @Column(name = "body",length = Integer.MAX_VALUE)
     private String body;
 
     @Column(name = "url")
     private String url;
 
     public Article() {
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getTitle() {
