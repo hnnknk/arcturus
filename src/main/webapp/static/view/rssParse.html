@@ -17,7 +17,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Название rss-ленты</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.rssQuery.url" name="name" class="field form-control input-sm" placeholder="Введите полное название rss-ленты"/>
+                            <input type="text" ng-model="ctrl.rssQuery.url" name="name" class="field form-control input-sm" placeholder="Введите полное название rss-ленты" required/>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Селектор поля тела новости</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.rssQuery.bodyTag" name="bodyTag" class="field form-control input-sm" placeholder="Введите селектор"/>
+                            <input type="text" ng-model="ctrl.rssQuery.bodyTag" name="bodyTag" class="field form-control input-sm" placeholder="Введите селектор" required/>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Название поля с телом новости</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.rssQuery.bodyName" name="bodyName" class="field form-control input-sm" placeholder="Введите значение"/>
+                            <input type="text" ng-model="ctrl.rssQuery.bodyName" name="bodyName" class="field form-control input-sm" placeholder="Введите значение" required/>
                         </div>
                     </div>
                 </div>

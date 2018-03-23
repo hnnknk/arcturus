@@ -7,9 +7,6 @@ import java.util.List;
 public interface ArticleDAO {
 
     void save(Article article);
-    void update(Article article);
-    void delete(long id);
-    Article findById(long id);
 
     List<Article> listAll();
 }

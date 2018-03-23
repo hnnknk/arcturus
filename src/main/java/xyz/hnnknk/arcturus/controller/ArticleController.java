@@ -23,13 +23,13 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired
-    ParserService parserServiceImpl;
+    private ParserService parserServiceImpl;
 
     @Autowired
-    RssParser rssParserImpl;
+    private RssParser rssParserImpl;
 
     @RequestMapping(value = "/parsing/parse/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createQuery(@Valid @RequestBody Query query) {
+    public ResponseEntity<Void> createQuery(@Valid @RequestBody final Query query) {
         System.out.println("Creating " + query.toString());
 
         try {
@@ -41,7 +41,7 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "/parsing/rssparse/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createRssQuery(@Valid @RequestBody RssQuery query) {
+    public ResponseEntity<Void> createRssQuery(@Valid @RequestBody final RssQuery query) {
         System.out.println("Creating " + query.toString());
 
         try {
@@ -55,7 +55,7 @@ public class ArticleController {
     @RequestMapping(value = "/parsing/results/", method = RequestMethod.GET)
     public ResponseEntity<List<Article>> listAll() {
         List<Article> articles = parserServiceImpl.listAll();
-        if(articles.isEmpty()){
+        if (articles.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(articles, HttpStatus.OK);

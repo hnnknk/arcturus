@@ -18,52 +18,61 @@ import xyz.hnnknk.arcturus.model.RssQuery;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
 
 @Service
 public class RssParserImpl implements RssParser {
 
+    private final int timeout = 10000;
+
     @Autowired
-    ArticleDAO articleDAO;
+    private ArticleDAO articleDAO;
 
     @Transactional
     @Override
-    public void parse(RssQuery query) throws IOException, FeedException {
+    public void parse(final RssQuery query) throws IOException, FeedException {
         parseFeed(createParser(query.getUrl()), query);
     }
 
-    public void parseFeed(SyndFeed feed, RssQuery query) throws IOException {
+    private void parseFeed(final SyndFeed feed, final RssQuery query) throws IOException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
         for (int i = 0; i < 3; i++) {
             SyndEntry entry = feed.getEntries().get(i);
-            
+
             Article article = new Article();
-            article.setDate(entry.getPublishedDate().toString());
+            article.setDate(dateFormat.format(entry.getPublishedDate()));
             article.setTitle(entry.getTitle());
             article.setBody(parseBody(entry.getLink(), query));
             articleDAO.save(article);
         }
     }
 
-    private String parseBody(String link, RssQuery query) throws IOException {
-        String result = "";
-        Document document = Jsoup.connect(link).timeout(10000).validateTLSCertificates(false).get();
+    @SuppressWarnings( "deprecation" )
+    private String parseBody(final String link, final RssQuery query) throws IOException {
+        StringBuilder result = new StringBuilder();
+        Document document = Jsoup.connect(link).timeout(timeout).validateTLSCertificates(false).get();
         Element element = document.getElementsByAttributeValue(query.getBodyTag(), query.getBodyName()).first();
 
         Elements childs;
-        if(query.getBodyTextTag().isEmpty()) {
+        if (query.getBodyTextTag().isEmpty()) {
             childs = element.select("p");
         } else {
             childs = element.select(query.getBodyTextTag());
         }
 
         for (Element child : childs) {
-            result = result + "\n" + child.text();
+            if (result.length() == 0) {
+                result.append("\t").append(child.text());
+            } else {
+                result.append("\n").append("\t").append(child.text());
+            }
         }
-        return result;
+        return result.toString();
     }
 
-    private SyndFeed createParser(String url) throws IllegalArgumentException, FeedException, IOException {
+    private SyndFeed createParser(final String url) throws IllegalArgumentException, FeedException, IOException {
         return new SyndFeedInput().build(new XmlReader(new URL(url)));
     }
 }

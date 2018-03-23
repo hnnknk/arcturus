@@ -25,7 +25,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean hibernateSessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setPackagesToScan(new String[] {"xyz.hnnknk.arcturus.model"});
+        sessionFactory.setPackagesToScan("xyz.hnnknk.arcturus.model");
         sessionFactory.setHibernateProperties(additionalProperties());
         return sessionFactory;
     }

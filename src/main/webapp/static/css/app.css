@@ -39,6 +39,10 @@ body, .form-control{
     width: 90px !important;
 }
 
+.alert {
+    display: none;
+}
+
 a:hover, a:focus {
     cursor: pointer;
 }

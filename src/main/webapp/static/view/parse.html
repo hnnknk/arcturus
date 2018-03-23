@@ -17,7 +17,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Название сайта</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.query.url" name="name" class="field form-control input-sm" placeholder="Введите полное название сайта"/>
+                            <input type="text" ng-model="ctrl.query.url" name="name" class="field form-control input-sm" placeholder="Введите полное название сайта" required ng-minlength="1"/>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable">Селектор поля даты</label>
                     <div class="col-md-6">
-                        <input type="text" ng-model="ctrl.query.dateTag" name="dateTag" class="field form-control input-sm" placeholder="Введите селектор"/>
+                        <input type="text" ng-model="ctrl.query.dateTag" name="dateTag" class="field form-control input-sm" placeholder="Введите селектор" required/>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Название поля даты</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.query.dateName" name="dateName" class="field form-control input-sm" placeholder="Введите значение"/>
+                            <input type="text" ng-model="ctrl.query.dateName" name="dateName" class="field form-control input-sm" placeholder="Введите значение" required/>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Селектор поля заголовка</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.query.titleTag" name="titleTag" class="field form-control input-sm" placeholder="Введите селектор"/>
+                            <input type="text" ng-model="ctrl.query.titleTag" name="titleTag" class="field form-control input-sm" placeholder="Введите селектор" required/>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Название поля заголовка</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.query.titleName" name="titleName" class="field form-control input-sm" placeholder="Введите значение"/>
+                            <input type="text" ng-model="ctrl.query.titleName" name="titleName" class="field form-control input-sm" placeholder="Введите значение" required/>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Абсолютная ли ссылка на новость</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.query.isFullLinkToBody" name="isFullLinkToBody" class="field form-control input-sm" placeholder="Введите true или false"/>
+                            <input type="text" ng-model="ctrl.query.isFullLinkToBody" name="isFullLinkToBody" class="field form-control input-sm" placeholder="Введите true или false" required/>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Селектор поля тела новости</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.query.bodyTag" name="bodyTag" class="field form-control input-sm" placeholder="Введите селектор"/>
+                            <input type="text" ng-model="ctrl.query.bodyTag" name="bodyTag" class="field form-control input-sm" placeholder="Введите селектор" required/>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">Название поля с телом новости</label>
                         <div class="col-md-6">
-                            <input type="text" ng-model="ctrl.query.bodyName" name="bodyName" class="field form-control input-sm" placeholder="Введите значение"/>
+                            <input type="text" ng-model="ctrl.query.bodyName" name="bodyName" class="field form-control input-sm" placeholder="Введите значение" required/>
                         </div>
                     </div>
                 </div>

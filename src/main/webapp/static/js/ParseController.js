@@ -33,19 +33,26 @@ angular.module('myApp').controller('ParseController', ['$scope', 'ParseService',
 
     function createQuery(query){
         ParseService.createQuery(query);
+        handleSuccessCreate();
     }
 
     function createRssQuery(query){
         ParseService.createRssQuery(query);
+        handleSuccessCreate();
+    }
+
+    function handleSuccessCreate() {
+        $(".alert").removeClass("in").show();
+        $(".alert").delay(1000).addClass("in").fadeOut(4000)
     }
 
     function kinopoiskSubmit() {
-        var kino = {url:'https://st.kp.yandex.net/rss/news.rss', bodyTag:'class', bodyName:'article__content newsContent error_report_area', bodyTextTag:''}
+        var kino = {url:'https://st.kp.yandex.net/rss/news.rss', bodyTag:'class', bodyName:'article__content newsContent error_report_area', bodyTextTag:''};
         createRssQuery(kino);
     }
 
     function sportSubmit() {
-        var sport = {url:'https://www.sports.ru/rss/rubric.xml?s=208', bodyTag:'class', bodyName:'https://www.sports.ru/rss/rubric.xml?s=208', bodyTextTag:''}
+        var sport = {url:'https://www.sports.ru/rss/rubric.xml?s=208', bodyTag:'class', bodyName:'news-item__content js-mediator-article', bodyTextTag:''};
         createRssQuery(sport)
     }
 
@@ -67,7 +74,7 @@ angular.module('myApp').controller('ParseController', ['$scope', 'ParseService',
 
     function submit() {
 
-        createQuery(createQuery(self.query));
+        createQuery(self.query);
         reset();
     }
 
@@ -80,7 +87,7 @@ angular.module('myApp').controller('ParseController', ['$scope', 'ParseService',
 
     function reset(){
         self.query = {url:'', urlSuffix:'', dateTag:'', dateName:'', dateTextTag:'', titleTag:'',
-            titleName:'', titleTextTag:'', isFullLinkToBody:false, bodyTag:'', bodyName:'', bodyTextTag:''};
+            titleName:'', titleTextTag:'', isFullLinkToBody:'', bodyTag:'', bodyName:'', bodyTextTag:''};
         self.rssQuery = {url:'', bodyTag:'', bodyName:'', bodyTextTag:''};
         $scope.myForm.$setPristine();
     }

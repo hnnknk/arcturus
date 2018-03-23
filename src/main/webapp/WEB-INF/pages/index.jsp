@@ -15,6 +15,7 @@
   <script src="webjars/angularjs/1.6.8/angular-route.min.js"></script>
 
   <script src="<c:url value='/static/js/app.js' />"></script>
+  <script src="<c:url value='/static/js/errorInterceptor.js' />"></script>
 
   <nav class="navbar navbar-default">
       <div class="container">
@@ -28,6 +29,10 @@
           </ul>
       </div>
   </nav>
+
+  <div class="alert alert-success fade al">
+      <p class="text-center"><strong>Запрос отправлен!</strong> Ваш запрос обрабатывается сервером, после обработки результаты отобразятся в разеде "Посмотреть результы".</p>
+  </div>
 
   <div ng-view></div>
 
